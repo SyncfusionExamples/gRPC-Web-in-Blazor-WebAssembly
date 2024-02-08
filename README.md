@@ -2,6 +2,8 @@
 
 This repository contains the output of the replacement of the REST services with gRPC-Web in Blazor WebAssembly.
 
+**UG Reference**: [https://blazor.syncfusion.com/documentation/common/data-binding/grpc-data-binding](https://blazor.syncfusion.com/documentation/common/data-binding/grpc-data-binding)
+
 ## Prerequisites
 
 * Visual Studio 2022
