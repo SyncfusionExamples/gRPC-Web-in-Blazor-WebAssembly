@@ -1,0 +1,37 @@
+﻿@page "/"
+
+
+@using BlazorGRPC.Shared
+@using Google.Protobuf.WellKnownTypes
+@inject OrdersService.OrdersServiceClient OrdersServiceClient
+
+<h1>Orders</h1>
+
+<p>This component demonstrates fetching data from the gRPC service.</p>
+
+@if (orders == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <SfGrid DataSource="@orders" AllowPaging="true">
+        <GridColumns>
+            <GridColumn Field=@nameof(Orders.OrderID) HeaderText="Order ID" TextAlign="TextAlign.Right" Width="120"></GridColumn>
+            <GridColumn Field=@nameof(Orders.CustomerName) HeaderText="Customer Name" Width="150"></GridColumn>
+            <GridColumn Field=@nameof(Orders.OrderDate) HeaderText=" Order Date" Format="d" Type="ColumnType.Date" TextAlign="TextAlign.Right" Width="130"></GridColumn>
+            <GridColumn Field=@nameof(Orders.ShipCountry) HeaderText="Ship Country" TextAlign="TextAlign.Right" Width="120"></GridColumn>
+            <GridColumn Field=@nameof(Orders.ShipCity) HeaderText="Ship City" Width="150"></GridColumn>
+        </GridColumns>
+    </SfGrid>
+}
+
+@code {
+
+    private IList<Orders> orders;
+
+    protected override async Task OnInitializedAsync()
+    {
+        orders = (await OrdersServiceClient.GetOrdersAsync(new Empty())).Orders;
+    }
+}

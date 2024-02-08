@@ -1,0 +1,24 @@
+﻿syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+
+option csharp_namespace = "BlazorAPPgRPC.Shared";
+
+package Orders;
+
+service OrdersService {
+  rpc GetOrders (google.protobuf.Empty) returns (OrdersResponse);
+}
+
+message OrdersResponse {
+  int32 Orders = 1;
+}
+
+message Orders {
+  google.protobuf.Timestamp dateTimeStamp = 1;
+  int32 OrderID = 2;
+  string CustomerName = 3;
+  string ShipCountry = 4;
+  string ShipCity = 5;
+}
